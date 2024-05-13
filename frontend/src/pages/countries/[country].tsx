@@ -27,7 +27,7 @@ const Country = (props: Country): React.ReactNode => {
         <h1>{country.name}</h1>
         <p>{country.emoji}</p>
         <p>Code: {country.code}</p>
-        <p>Continent: {country.continent.name}</p>
+        <p>{country.continent && <p>Continent: {country.continent.name}</p>}</p>
       </div>
     </Header>
   );
