@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Country } from "../types";
 import { useMutation, useQuery } from "@apollo/client";
 import { queryAllCountries } from "@/graphql/queryAllCountries";
-import { mutationCreateCountry } from "@/graphql/mutationCreateCountry";
+import { mutationCreatedCountry } from "@/graphql/mutationCreateCountry";
 
 const RecentsCountries = (): React.ReactNode => {
   const [name, setName] = useState("");
@@ -13,8 +13,8 @@ const RecentsCountries = (): React.ReactNode => {
 
   const countries: Country[] = data ? data.countries : [];
 
-  const [createCountry] = useMutation<{ addCountry: Country[] }>(
-    mutationCreateCountry,
+  const [createCountry] = useMutation<{ addCountry: Country }>(
+    mutationCreatedCountry,
     {
       refetchQueries: [{ query: queryAllCountries }],
     }
