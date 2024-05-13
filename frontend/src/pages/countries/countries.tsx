@@ -6,9 +6,15 @@ import Header from "@/components/Header";
 import Link from "next/link";
 
 const Countries = (): React.ReactNode => {
-  const { data } = useQuery<{ countries: Country[] }>(queryAllCountries);
+  const { loading, error, data } = useQuery<{ countries: Country[] }>(
+    queryAllCountries
+  );
 
-  const countries: Country[] = data ? data.countries : [];
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data || !data.countries) return <div>Countries not found</div>;
+
+  const countries = data.countries;
 
   return (
     <Header>
@@ -20,7 +26,9 @@ const Countries = (): React.ReactNode => {
             </Link>
             <p>{country.emoji}</p>
             <p>Code: {country.code}</p>
-            <p>Continent: {country.continent.name}</p>
+            <p>
+              {country.continent && <p>Continent: {country.continent.name}</p>}
+            </p>
           </div>
         ))}
       </div>

@@ -7,7 +7,6 @@ import { queryCountryByCode } from "@/graphql/queryCountryByCode";
 const Country = (props: Country): React.ReactNode => {
   const router = useRouter();
   const code = router.query.country;
-  console.log(router.query);
 
   const { loading, error, data } = useQuery<{ country: Country }>(
     queryCountryByCode,

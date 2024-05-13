@@ -13,8 +13,8 @@ const Header: React.FC<Props> = ({ children }) => {
     <>
       <header className="header">
         <h1>Checkpoint : frontend</h1>
-        {router.pathname !== "/countries" ? (
-          <Link href="/countries">Countrie</Link>
+        {router.pathname !== "/countries/countries" ? (
+          <Link href="/countries/countries">Countries</Link>
         ) : (
           <Link href="/">Home</Link>
         )}
