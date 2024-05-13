@@ -9,16 +9,22 @@ const RecentsCountries = (): React.ReactNode => {
   const [emoji, setEmoji] = useState("");
   const [code, setCode] = useState("");
 
-  const { data } = useQuery<{ countries: Country[] }>(queryAllCountries);
+  const { loading, error, data } = useQuery<{ countries: Country[] }>(
+    queryAllCountries
+  );
 
-  const countries: Country[] = data ? data.countries : [];
-
-  const [createCountry] = useMutation<{ addCountry: Country }>(
+  const [createCountry] = useMutation<{ addCountry: Country[] }>(
     mutationCreatedCountry,
     {
       refetchQueries: [{ query: queryAllCountries }],
     }
   );
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data || !data.countries) return <div>Countries not found</div>;
+
+  const countries = data.countries;
 
   const addCountry = async (e: React.FormEvent) => {
     e.preventDefault();
